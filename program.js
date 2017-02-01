@@ -14,7 +14,11 @@ process.stdin.on('readable', function () {
                 process.stdout.write('Wersja Node.js: ' + process.versions.node + '\n');
                 break;
             case '/lang':
-                process.stdout.write('Język systemowy użytkownika: ' + process.env.LANG + '\n'); //niestety w Windows nie ma zdefiniowanej tej stałej ani niczego co by ją przypominało
+                if (process.env.LANG === undefined) {
+                    process.stderr.write('Zmienna środowiskowa \'LANG\' nie została zdefiniowana!\n');
+                } else {
+                    process.stdout.write('Język systemowy użytkownika: ' + process.env.LANG + '\n');
+                }
                 break;
             default:
                 process.stderr.write('Wrong instruction!\n');
