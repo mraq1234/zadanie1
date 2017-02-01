@@ -1,7 +1,6 @@
 process.stdin.setEncoding('utf-8');
 
 process.stdin.on('readable', function () {
-    // metoda .read() ma za zadanie odczytać co użytkownik podał na wejściu
     var input = process.stdin.read();
     if (input !== null) {
         var instruction = input.toString().trim();
@@ -14,7 +13,7 @@ process.stdin.on('readable', function () {
                 process.stdout.write('Wersja Node.js: ' + process.versions.node + '\n');
                 break;
             case '/lang':
-                if (process.env.LANG === undefined) {
+                if (!process.env.LANG) {
                     process.stderr.write('Zmienna środowiskowa \'LANG\' nie została zdefiniowana!\n');
                 } else {
                     process.stdout.write('Język systemowy użytkownika: ' + process.env.LANG + '\n');
